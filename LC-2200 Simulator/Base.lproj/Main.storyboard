@@ -404,7 +404,7 @@
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ZY-de-Jj8">
-                                <rect key="frame" x="15" y="54" width="121" height="32"/>
+                                <rect key="frame" x="15" y="54" width="141" height="32"/>
                                 <buttonCell key="cell" type="push" title="Run" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oZ4-Y2-YyU">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -414,7 +414,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rxf-Zn-vwl">
-                                <rect key="frame" x="15" y="13" width="121" height="32"/>
+                                <rect key="frame" x="15" y="13" width="141" height="32"/>
                                 <buttonCell key="cell" type="push" title="Step Back" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tsx-0R-FtS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -424,7 +424,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KFV-bA-J56">
-                                <rect key="frame" x="136" y="54" width="121" height="32"/>
+                                <rect key="frame" x="156" y="54" width="141" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Lhc-pj-ZA7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -434,7 +434,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fsY-Sp-Xwb">
-                                <rect key="frame" x="136" y="13" width="121" height="32"/>
+                                <rect key="frame" x="156" y="13" width="141" height="32"/>
                                 <buttonCell key="cell" type="push" title="Step Forward" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FoN-FM-FmQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -443,22 +443,48 @@
                                     <action selector="stepProcessor:" target="XfG-lQ-9wD" id="7yl-3e-3cd"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A9X-iQ-Dsm">
+                                <rect key="frame" x="472" y="54" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="Set Breakpoint" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aOe-DJ-UVX">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="setBreakpoint:" target="XfG-lQ-9wD" id="YY5-KR-zNP"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="psy-Co-6zb">
+                                <rect key="frame" x="472" y="13" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="Clear Breakpoint" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="77D-5M-dei">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeBreakpoint:" target="XfG-lQ-9wD" id="jDa-eN-6cd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="E1P-6v-sLI" firstAttribute="bottom" secondItem="7ph-Ms-sQO" secondAttribute="bottom" id="0VQ-pm-5BQ"/>
+                            <constraint firstItem="psy-Co-6zb" firstAttribute="width" secondItem="A9X-iQ-Dsm" secondAttribute="width" id="5bE-1p-MBE"/>
                             <constraint firstItem="Rxf-Zn-vwl" firstAttribute="top" secondItem="6ZY-de-Jj8" secondAttribute="bottom" constant="20" id="63L-3z-Xuk"/>
                             <constraint firstItem="KFV-bA-J56" firstAttribute="leading" secondItem="fsY-Sp-Xwb" secondAttribute="leading" id="6ik-vg-keE"/>
                             <constraint firstItem="fsY-Sp-Xwb" firstAttribute="top" secondItem="KFV-bA-J56" secondAttribute="bottom" constant="20" id="Ak2-WW-yDf"/>
                             <constraint firstItem="E1P-6v-sLI" firstAttribute="leading" secondItem="7ph-Ms-sQO" secondAttribute="trailing" constant="8" id="BSt-lC-vD9"/>
-                            <constraint firstItem="KFV-bA-J56" firstAttribute="width" secondItem="fsY-Sp-Xwb" secondAttribute="width" id="Eoh-8r-b2y"/>
+                            <constraint firstItem="A9X-iQ-Dsm" firstAttribute="top" secondItem="KFV-bA-J56" secondAttribute="top" id="Ea8-a1-nu3"/>
+                            <constraint firstItem="psy-Co-6zb" firstAttribute="top" secondItem="fsY-Sp-Xwb" secondAttribute="top" id="FdU-xw-GQm"/>
+                            <constraint firstItem="fsY-Sp-Xwb" firstAttribute="width" secondItem="6ZY-de-Jj8" secondAttribute="width" id="G6O-Jk-eNe"/>
                             <constraint firstAttribute="bottom" secondItem="Rxf-Zn-vwl" secondAttribute="bottom" constant="20" id="GSd-np-jr5"/>
                             <constraint firstAttribute="trailing" secondItem="E1P-6v-sLI" secondAttribute="trailing" constant="20" id="IsM-ZL-VTT"/>
+                            <constraint firstItem="KFV-bA-J56" firstAttribute="width" secondItem="6ZY-de-Jj8" secondAttribute="width" id="Mau-y9-fS0"/>
+                            <constraint firstItem="6ZY-de-Jj8" firstAttribute="width" secondItem="A9X-iQ-Dsm" secondAttribute="width" id="R6f-ae-Bc5"/>
                             <constraint firstItem="Rxf-Zn-vwl" firstAttribute="top" secondItem="fsY-Sp-Xwb" secondAttribute="top" id="RLi-G6-hFo"/>
                             <constraint firstItem="7ph-Ms-sQO" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="ShZ-fj-z64"/>
+                            <constraint firstItem="Rxf-Zn-vwl" firstAttribute="width" secondItem="6ZY-de-Jj8" secondAttribute="width" id="T4a-T0-1c8"/>
                             <constraint firstItem="6ZY-de-Jj8" firstAttribute="leading" secondItem="xHn-NR-1O6" secondAttribute="leading" id="ZsL-X8-ANN"/>
-                            <constraint firstItem="fsY-Sp-Xwb" firstAttribute="width" secondItem="Rxf-Zn-vwl" secondAttribute="width" id="cq7-7H-Muw"/>
-                            <constraint firstItem="6ZY-de-Jj8" firstAttribute="width" secondItem="Rxf-Zn-vwl" secondAttribute="width" id="ehP-SJ-HEr"/>
+                            <constraint firstItem="A9X-iQ-Dsm" firstAttribute="trailing" secondItem="xHn-NR-1O6" secondAttribute="trailing" id="inq-X0-1pn"/>
                             <constraint firstAttribute="trailing" secondItem="7ph-Ms-sQO" secondAttribute="trailing" constant="192" id="mHQ-Aq-IgC"/>
+                            <constraint firstItem="psy-Co-6zb" firstAttribute="trailing" secondItem="A9X-iQ-Dsm" secondAttribute="trailing" id="n9g-X6-A8q"/>
                             <constraint firstAttribute="bottom" secondItem="7ph-Ms-sQO" secondAttribute="bottom" constant="100" id="nLD-4M-0pU"/>
                             <constraint firstItem="Rxf-Zn-vwl" firstAttribute="leading" secondItem="6ZY-de-Jj8" secondAttribute="leading" id="oeS-Ud-15c"/>
                             <constraint firstItem="Rxf-Zn-vwl" firstAttribute="bottom" secondItem="fsY-Sp-Xwb" secondAttribute="bottom" id="sF6-Jd-b7R"/>

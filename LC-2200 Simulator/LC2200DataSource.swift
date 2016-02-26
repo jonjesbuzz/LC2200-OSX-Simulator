@@ -24,7 +24,7 @@ extension ViewController: NSTableViewDataSource {
 extension ViewController: NSTableViewDelegate {
     
     func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-        return (tableView != memoryTableView)
+        return true
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -55,6 +55,11 @@ extension ViewController: NSTableViewDelegate {
         }
         if let cell = self.memoryTableView.makeViewWithIdentifier(identifier, owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = text
+            if (processor.hasBreakpointAtAddress(UInt16(row))) {
+                cell.layer?.backgroundColor = NSColor(hue: 0.0, saturation: 0.46, brightness: 0.92, alpha: 1.0).CGColor
+            } else {
+                cell.layer?.backgroundColor = NSColor.clearColor().CGColor
+            }
             return cell
         }
         return nil

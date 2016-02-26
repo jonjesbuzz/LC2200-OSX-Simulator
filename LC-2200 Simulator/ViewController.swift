@@ -15,6 +15,9 @@ class ViewController: NSViewController {
     @IBOutlet weak var memoryTableView: NSTableView!
     @IBOutlet weak var registerTableView: NSTableView!
     
+    let queue = dispatch_queue_create("com.cixocommunications.LC-2200-Simulator.runQueue", DISPATCH_QUEUE_SERIAL)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -31,6 +34,7 @@ class ViewController: NSViewController {
         let register = RegisterFile.Register(rawValue: UInt8(truncatingBitPattern: registerTableView.selectedRow))!
         let index = Int(processor.registers[register])
         self.memoryTableView.scrollRowToVisible(index)
+        self.memoryTableView.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
     }
     
     override func viewWillAppear() {
@@ -69,23 +73,56 @@ class ViewController: NSViewController {
         }
     }
     @IBAction func runProcessor(sender: NSButton) {
-        processor.run()
-        processorDidChange()
+        dispatch_async(queue) { [unowned self] in
+            self.processor.run()
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.processorDidChange()
+            }
+        }
     }
     
     @IBAction func stepProcessor(sender: NSButton) {
-        processor.step()
-        processorDidChange()
+        dispatch_async(queue) { [unowned self] in
+            self.processor.step()
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.processorDidChange()
+            }
+        }
     }
     
     @IBAction func rewindProcessor(sender: NSButton) {
-        processor.rewind()
-        processorDidChange()
+        dispatch_async(queue) { [unowned self] in
+            self.processor.rewind()
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.processorDidChange()
+            }
+        }
     }
     
     @IBAction func resetProcessor(sender: NSButton) {
-        processor.reset()
-        processorDidChange()
+        dispatch_async(queue) { [unowned self] in
+            self.processor.reset()
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.processorDidChange()
+            }
+        }
+    }
+    
+    @IBAction func setBreakpoint(sender: NSButton) {
+        dispatch_async(queue) { [unowned self] in
+            self.processor.setBreakpoint(UInt16(self.memoryTableView.selectedRow))
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.processorDidChange()
+            }
+        }
+    }
+    @IBAction func removeBreakpoint(sender: NSButton) {
+        dispatch_async(queue) { [unowned self] in
+            self.processor.removeBreakpoint(UInt16(self.memoryTableView.selectedRow))
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.processorDidChange()
+            }
+        }
     }
     
     private func processorDidChange() {
