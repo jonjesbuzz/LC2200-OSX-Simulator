@@ -12,12 +12,9 @@
 		AB2DA2B11C7F994D00D50B0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB2DA2B01C7F994D00D50B0D /* Assets.xcassets */; };
 		AB2DA2B41C7F994D00D50B0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB2DA2B21C7F994D00D50B0D /* Main.storyboard */; };
 		AB2DA2BF1C7F994D00D50B0D /* LC_2200_SimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2BE1C7F994D00D50B0D /* LC_2200_SimulatorTests.swift */; };
-		AB2DA2CF1C7F9E5800D50B0D /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2CA1C7F9E5800D50B0D /* Instruction.swift */; };
-		AB2DA2D01C7F9E5800D50B0D /* LC2200Processor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2CB1C7F9E5800D50B0D /* LC2200Processor.swift */; };
-		AB2DA2D11C7F9E5800D50B0D /* RegisterFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2CC1C7F9E5800D50B0D /* RegisterFile.swift */; };
-		AB2DA2D21C7F9E5800D50B0D /* RewindInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2CD1C7F9E5800D50B0D /* RewindInfo.swift */; };
-		AB2DA2D31C7F9E5800D50B0D /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2CE1C7F9E5800D50B0D /* Stack.swift */; };
 		AB2DA2D51C7F9F7100D50B0D /* LC2200DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2D41C7F9F7100D50B0D /* LC2200DataSource.swift */; };
+		ABD1FA9F1C820C1300BB9C0C /* LC2200Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD1FA9E1C820C1300BB9C0C /* LC2200Kit.framework */; };
+		ABD1FAA01C820C1300BB9C0C /* LC2200Kit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ABD1FA9E1C820C1300BB9C0C /* LC2200Kit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +27,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		ABD1FAA11C820C1300BB9C0C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ABD1FAA01C820C1300BB9C0C /* LC2200Kit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		AB2DA2A91C7F994D00D50B0D /* LC-2200 Simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LC-2200 Simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2DA2AC1C7F994D00D50B0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,12 +51,8 @@
 		AB2DA2BA1C7F994D00D50B0D /* LC-2200 SimulatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LC-2200 SimulatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2DA2BE1C7F994D00D50B0D /* LC_2200_SimulatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LC_2200_SimulatorTests.swift; sourceTree = "<group>"; };
 		AB2DA2C01C7F994D00D50B0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB2DA2CA1C7F9E5800D50B0D /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Instruction.swift; path = ../../../Developer/SwiftLang/LC2200/Sources/Instruction.swift; sourceTree = "<group>"; };
-		AB2DA2CB1C7F9E5800D50B0D /* LC2200Processor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LC2200Processor.swift; path = ../../../Developer/SwiftLang/LC2200/Sources/LC2200Processor.swift; sourceTree = "<group>"; };
-		AB2DA2CC1C7F9E5800D50B0D /* RegisterFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterFile.swift; path = ../../../Developer/SwiftLang/LC2200/Sources/RegisterFile.swift; sourceTree = "<group>"; };
-		AB2DA2CD1C7F9E5800D50B0D /* RewindInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewindInfo.swift; path = ../../../Developer/SwiftLang/LC2200/Sources/RewindInfo.swift; sourceTree = "<group>"; };
-		AB2DA2CE1C7F9E5800D50B0D /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = ../../../Developer/SwiftLang/LC2200/Sources/Stack.swift; sourceTree = "<group>"; };
 		AB2DA2D41C7F9F7100D50B0D /* LC2200DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC2200DataSource.swift; sourceTree = "<group>"; };
+		ABD1FA9E1C820C1300BB9C0C /* LC2200Kit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LC2200Kit.framework; path = Carthage/Build/Mac/LC2200Kit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABD1FA9F1C820C1300BB9C0C /* LC2200Kit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +77,7 @@
 		AB2DA2A01C7F994D00D50B0D = {
 			isa = PBXGroup;
 			children = (
+				ABD1FA9E1C820C1300BB9C0C /* LC2200Kit.framework */,
 				AB2DA2AB1C7F994D00D50B0D /* LC-2200 Simulator */,
 				AB2DA2BD1C7F994D00D50B0D /* LC-2200 SimulatorTests */,
 				AB2DA2AA1C7F994D00D50B0D /* Products */,
@@ -87,7 +96,6 @@
 		AB2DA2AB1C7F994D00D50B0D /* LC-2200 Simulator */ = {
 			isa = PBXGroup;
 			children = (
-				AB2DA2C91C7F9E3D00D50B0D /* SimulatorSupport */,
 				AB2DA2AC1C7F994D00D50B0D /* AppDelegate.swift */,
 				AB2DA2AE1C7F994D00D50B0D /* ViewController.swift */,
 				AB2DA2D41C7F9F7100D50B0D /* LC2200DataSource.swift */,
@@ -107,18 +115,6 @@
 			path = "LC-2200 SimulatorTests";
 			sourceTree = "<group>";
 		};
-		AB2DA2C91C7F9E3D00D50B0D /* SimulatorSupport */ = {
-			isa = PBXGroup;
-			children = (
-				AB2DA2CA1C7F9E5800D50B0D /* Instruction.swift */,
-				AB2DA2CB1C7F9E5800D50B0D /* LC2200Processor.swift */,
-				AB2DA2CC1C7F9E5800D50B0D /* RegisterFile.swift */,
-				AB2DA2CD1C7F9E5800D50B0D /* RewindInfo.swift */,
-				AB2DA2CE1C7F9E5800D50B0D /* Stack.swift */,
-			);
-			name = SimulatorSupport;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -129,6 +125,7 @@
 				AB2DA2A51C7F994D00D50B0D /* Sources */,
 				AB2DA2A61C7F994D00D50B0D /* Frameworks */,
 				AB2DA2A71C7F994D00D50B0D /* Resources */,
+				ABD1FAA11C820C1300BB9C0C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -220,13 +217,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB2DA2D21C7F9E5800D50B0D /* RewindInfo.swift in Sources */,
-				AB2DA2D11C7F9E5800D50B0D /* RegisterFile.swift in Sources */,
-				AB2DA2D31C7F9E5800D50B0D /* Stack.swift in Sources */,
-				AB2DA2CF1C7F9E5800D50B0D /* Instruction.swift in Sources */,
 				AB2DA2AF1C7F994D00D50B0D /* ViewController.swift in Sources */,
 				AB2DA2AD1C7F994D00D50B0D /* AppDelegate.swift in Sources */,
-				AB2DA2D01C7F9E5800D50B0D /* LC2200Processor.swift in Sources */,
 				AB2DA2D51C7F9F7100D50B0D /* LC2200DataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +341,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "LC-2200 Simulator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cixocommunications.LC-2200-Simulator";
@@ -362,6 +358,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "LC-2200 Simulator/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cixocommunications.LC-2200-Simulator";

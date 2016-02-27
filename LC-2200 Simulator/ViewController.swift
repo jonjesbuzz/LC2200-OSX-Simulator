@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import LC2200Kit
 
 class ViewController: NSViewController {
     

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import LC2200Kit
 
 extension ViewController: NSTableViewDataSource {
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
@@ -14,7 +15,7 @@ extension ViewController: NSTableViewDataSource {
         case self.memoryTableView:
             return self.processor.memory.count
         case self.registerTableView:
-            return self.processor.registers.registers.count
+            return self.processor.registers.count
         default:
             return 0
         }
@@ -72,9 +73,9 @@ extension ViewController: NSTableViewDelegate {
             text = RegisterFile.Register(rawValue: UInt8(truncatingBitPattern: row))!.description
             identifier = "registerCellID"
         } else if column == registerTableView.tableColumns[1] {
-            text = "\(processor.registers.registers[row])"
+            text = "\(processor.registers[row])"
             if (row >= 13) {
-                text = String(format: "0x%04x", processor.registers.registers[row])
+                text = String(format: "0x%04x", processor.registers[row])
             }
             identifier = "registerValueCellID"
         }
