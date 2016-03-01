@@ -41,7 +41,7 @@ class ViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         let openPanel = NSOpenPanel()
-        openPanel.allowedFileTypes = ["lc"]
+        openPanel.allowedFileTypes = ["lc", "s"]
         let result = openPanel.runModal()
         openPanel.allowsMultipleSelection = false
         openPanel.allowsOtherFileTypes = false
@@ -49,21 +49,32 @@ class ViewController: NSViewController {
         openPanel.canChooseFiles = true
         if result == NSFileHandlingPanelOKButton {
             let memory: String
-            do {
-                memory = try String(contentsOfURL: openPanel.URLs.first!, encoding: NSUTF8StringEncoding)
-            } catch {
-                print(error)
-                exit(1)
-            }
-            let vals = memory.characters.split { $0 == " " || $0 == "\n" }.map(String.init)
-            let things = vals.map { (s) -> (UInt16) in
-                if let data = UInt16(s, radix: 16) {
-                    return data
+            if openPanel.URLs.first!.pathExtension == "lc" {
+                do {
+                    memory = try String(contentsOfURL: openPanel.URLs.first!, encoding: NSUTF8StringEncoding)
+                } catch {
+                    print(error)
+                    exit(1)
                 }
-                print("File \(openPanel.URLs.first!) is not a valid LC2200 file.")
-                exit(1)
+                let vals = memory.characters.split { $0 == " " || $0 == "\n" }.map(String.init)
+                let things = vals.map { (s) -> (UInt16) in
+                    if let data = UInt16(s, radix: 16) {
+                        return data
+                    }
+                    print("File \(openPanel.URLs.first!) is not a valid LC2200 file.")
+                    exit(1)
+                }
+                processor.setupMemory(things)
+            } else if openPanel.URLs.first!.pathExtension == "s" {
+                do {
+                    memory = try String(contentsOfURL: openPanel.URLs.first!, encoding: NSUTF8StringEncoding)
+                } catch {
+                    print(error)
+                    exit(1)
+                }
+                var assembler = LC2200Assembler(source: memory)
+                processor.setupMemory(assembler.assemble())
             }
-            processor.setupMemory(things)
             self.memoryTableView.reloadData()
             let indexSet = NSIndexSet(index: Int(self.processor.currentAddress))
             self.memoryTableView.selectRowIndexes(indexSet, byExtendingSelection: false)
