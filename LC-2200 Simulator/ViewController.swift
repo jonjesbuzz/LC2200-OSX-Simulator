@@ -73,7 +73,15 @@ class ViewController: NSViewController {
                     exit(1)
                 }
                 var assembler = LC2200Assembler(source: memory)
-                processor.setupMemory(assembler.assemble())
+                do {
+                    processor.setupMemory(try assembler.assemble())
+                } catch {
+                    let alert = NSAlert()
+                    alert.messageText = "Could not parse assembly."
+                    alert.addButtonWithTitle("OK")
+                    alert.runModal()
+                    exit(1)
+                }
             }
             self.memoryTableView.reloadData()
             let indexSet = NSIndexSet(index: Int(self.processor.currentAddress))
