@@ -28,7 +28,7 @@ class ViewController: NSViewController {
         memoryTableView.setDataSource(self)
         registerTableView.setDataSource(self)
         registerTableView.target = self
-        registerTableView.doubleAction = #selector(ViewController.goToRegister)
+        registerTableView.doubleAction = "goToRegister"
     }
     
     func goToRegister() {
