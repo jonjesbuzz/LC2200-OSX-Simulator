@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		ABD7EF3A1C87A70F007719E0 /* Carthage */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ABD7EF3D1C87A70F007719E0 /* Build configuration list for PBXAggregateTarget "Carthage" */;
+			buildPhases = (
+				ABD7EF3E1C87A719007719E0 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Carthage;
+			productName = Carthage;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		AB2DA2AD1C7F994D00D50B0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2AC1C7F994D00D50B0D /* AppDelegate.swift */; };
 		AB2DA2AF1C7F994D00D50B0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2DA2AE1C7F994D00D50B0D /* ViewController.swift */; };
@@ -172,6 +186,9 @@
 						CreatedOnToolsVersion = 7.3;
 						TestTargetID = AB2DA2A81C7F994D00D50B0D;
 					};
+					ABD7EF3A1C87A70F007719E0 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 				};
 			};
 			buildConfigurationList = AB2DA2A41C7F994D00D50B0D /* Build configuration list for PBXProject "LC-2200 Simulator" */;
@@ -189,6 +206,7 @@
 			targets = (
 				AB2DA2A81C7F994D00D50B0D /* LC-2200 Simulator */,
 				AB2DA2B91C7F994D00D50B0D /* LC-2200 SimulatorTests */,
+				ABD7EF3A1C87A70F007719E0 /* Carthage */,
 			);
 		};
 /* End PBXProject section */
@@ -211,6 +229,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ABD7EF3E1C87A719007719E0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "carthage update --platform OSX\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB2DA2A51C7F994D00D50B0D /* Sources */ = {
@@ -395,6 +429,20 @@
 			};
 			name = Release;
 		};
+		ABD7EF3B1C87A70F007719E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ABD7EF3C1C87A70F007719E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -421,6 +469,15 @@
 			buildConfigurations = (
 				AB2DA2C71C7F994D00D50B0D /* Debug */,
 				AB2DA2C81C7F994D00D50B0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABD7EF3D1C87A70F007719E0 /* Build configuration list for PBXAggregateTarget "Carthage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABD7EF3B1C87A70F007719E0 /* Debug */,
+				ABD7EF3C1C87A70F007719E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
