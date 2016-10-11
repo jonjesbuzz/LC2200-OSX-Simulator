@@ -10,7 +10,7 @@ import Cocoa
 import LC2200Kit
 
 extension ViewController: NSTableViewDataSource {
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         switch tableView {
         case self.memoryTableView:
             return self.processor.memory.count
@@ -24,11 +24,11 @@ extension ViewController: NSTableViewDataSource {
 
 extension ViewController: NSTableViewDelegate {
     
-    func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
         return true
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if tableView == self.memoryTableView {
             return configureMemoryTableCell(column: tableColumn, row: row)
         } else if tableView == self.registerTableView {
@@ -37,7 +37,7 @@ extension ViewController: NSTableViewDelegate {
         return nil
     }
     
-    private func configureMemoryTableCell(column column: NSTableColumn?, row: Int) -> NSView? {
+    fileprivate func configureMemoryTableCell(column: NSTableColumn?, row: Int) -> NSView? {
         var text = ""
         var identifier = ""
         let memLoc = processor.memory[row]
@@ -54,19 +54,19 @@ extension ViewController: NSTableViewDelegate {
             text = Instruction(value: memLoc).debugDescription
             identifier = "instructionCellID"
         }
-        if let cell = self.memoryTableView.makeViewWithIdentifier(identifier, owner: nil) as? NSTableCellView {
+        if let cell = self.memoryTableView.make(withIdentifier: identifier, owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = text
             if (processor.hasBreakpointAtAddress(UInt16(row))) {
-                cell.layer?.backgroundColor = NSColor(hue: 0.0, saturation: 0.46, brightness: 0.92, alpha: 1.0).CGColor
+                cell.layer?.backgroundColor = NSColor(hue: 0.0, saturation: 0.46, brightness: 0.92, alpha: 1.0).cgColor
             } else {
-                cell.layer?.backgroundColor = NSColor.clearColor().CGColor
+                cell.layer?.backgroundColor = NSColor.clear.cgColor
             }
             return cell
         }
         return nil
     }
     
-    private func configureRegisterTableCell(column column: NSTableColumn?, row: Int) -> NSView? {
+    fileprivate func configureRegisterTableCell(column: NSTableColumn?, row: Int) -> NSView? {
         var text = ""
         var identifier = ""
         if column == registerTableView.tableColumns[0] {
@@ -79,7 +79,7 @@ extension ViewController: NSTableViewDelegate {
             }
             identifier = "registerValueCellID"
         }
-        if let cell = self.registerTableView.makeViewWithIdentifier(identifier, owner: nil) as? NSTableCellView {
+        if let cell = self.registerTableView.make(withIdentifier: identifier, owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = text
             return cell
         }

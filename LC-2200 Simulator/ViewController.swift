@@ -16,26 +16,26 @@ class ViewController: NSViewController {
     @IBOutlet weak var memoryTableView: NSTableView!
     @IBOutlet weak var registerTableView: NSTableView!
     
-    let queue = dispatch_queue_create("com.cixocommunications.LC-2200-Simulator.runQueue", DISPATCH_QUEUE_SERIAL)
+    let queue = DispatchQueue(label: "com.cixocommunications.LC-2200-Simulator.runQueue", attributes: [])
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.processor = LC2200Processor()
-        memoryTableView.setDelegate(self)
-        registerTableView.setDelegate(self)
-        memoryTableView.setDataSource(self)
-        registerTableView.setDataSource(self)
+        memoryTableView.delegate = self
+        registerTableView.delegate = (self)
+        memoryTableView.dataSource = (self)
+        registerTableView.dataSource = (self)
         registerTableView.target = self
-        registerTableView.doubleAction = "goToRegister"
+        registerTableView.doubleAction = #selector(ViewController.goToRegister)
     }
     
     func goToRegister() {
         let register = RegisterFile.Register(rawValue: UInt8(truncatingBitPattern: registerTableView.selectedRow))!
         let index = Int(processor.registers[register])
         self.memoryTableView.scrollRowToVisible(index)
-        self.memoryTableView.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
+        self.memoryTableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
     
     override func viewWillAppear() {
@@ -49,9 +49,9 @@ class ViewController: NSViewController {
         openPanel.canChooseFiles = true
         if result == NSFileHandlingPanelOKButton {
             let memory: String
-            if openPanel.URLs.first!.pathExtension == "lc" {
+            if openPanel.urls.first!.pathExtension == "lc" {
                 do {
-                    memory = try String(contentsOfURL: openPanel.URLs.first!, encoding: NSUTF8StringEncoding)
+                    memory = try String(contentsOf: openPanel.urls.first!, encoding: String.Encoding.utf8)
                 } catch {
                     print(error)
                     exit(1)
@@ -61,13 +61,13 @@ class ViewController: NSViewController {
                     if let data = UInt16(s, radix: 16) {
                         return data
                     }
-                    print("File \(openPanel.URLs.first!) is not a valid LC2200 file.")
+                    print("File \(openPanel.urls.first!) is not a valid LC2200 file.")
                     exit(1)
                 }
                 processor.setupMemory(things)
-            } else if openPanel.URLs.first!.pathExtension == "s" {
+            } else if openPanel.urls.first!.pathExtension == "s" {
                 do {
-                    memory = try String(contentsOfURL: openPanel.URLs.first!, encoding: NSUTF8StringEncoding)
+                    memory = try String(contentsOf: openPanel.urls.first!, encoding: String.Encoding.utf8)
                 } catch {
                     print(error)
                     exit(1)
@@ -78,13 +78,13 @@ class ViewController: NSViewController {
                 } catch {
                     let alert = NSAlert()
                     alert.messageText = "Could not parse assembly."
-                    alert.addButtonWithTitle("OK")
+                    alert.addButton(withTitle: "OK")
                     alert.runModal()
                     exit(1)
                 }
             }
             self.memoryTableView.reloadData()
-            let indexSet = NSIndexSet(index: Int(self.processor.currentAddress))
+            let indexSet = IndexSet(integer: Int(self.processor.currentAddress))
             self.memoryTableView.selectRowIndexes(indexSet, byExtendingSelection: false)
             self.memoryTableView.allowsEmptySelection = false
             self.registerTableView.reloadData()
@@ -92,68 +92,68 @@ class ViewController: NSViewController {
             exit(0)
         }
     }
-    @IBAction func runProcessor(sender: NSButton) {
-        dispatch_async(queue) { [unowned self] in
+    @IBAction func runProcessor(_ sender: NSButton) {
+        queue.async { [unowned self] in
             self.processor.run()
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+            DispatchQueue.main.async { [unowned self] in
                 self.processorDidChange()
             }
         }
     }
     
-    @IBAction func stepProcessor(sender: NSButton) {
-        dispatch_async(queue) { [unowned self] in
+    @IBAction func stepProcessor(_ sender: NSButton) {
+        queue.async { [unowned self] in
             self.processor.step()
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+            DispatchQueue.main.async { [unowned self] in
                 self.processorDidChange()
             }
         }
     }
     
-    @IBAction func rewindProcessor(sender: NSButton) {
-        dispatch_async(queue) { [unowned self] in
-            self.processor.rewind()
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+    @IBAction func rewindProcessor(_ sender: NSButton) {
+        queue.async { [unowned self] in
+            _ = self.processor.rewind()
+            DispatchQueue.main.async { [unowned self] in
                 self.processorDidChange()
             }
         }
     }
     
-    @IBAction func resetProcessor(sender: NSButton) {
-        dispatch_async(queue) { [unowned self] in
+    @IBAction func resetProcessor(_ sender: NSButton) {
+        queue.async { [unowned self] in
             self.processor.reset()
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+            DispatchQueue.main.async { [unowned self] in
                 self.processorDidChange()
             }
         }
     }
     
-    @IBAction func setBreakpoint(sender: NSButton) {
-        dispatch_async(queue) { [unowned self] in
-            self.processor.setBreakpoint(UInt16(self.memoryTableView.selectedRow))
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+    @IBAction func setBreakpoint(_ sender: NSButton) {
+        queue.async { [unowned self] in
+            self.processor.setBreakpoint(location: UInt16(self.memoryTableView.selectedRow))
+            DispatchQueue.main.async { [unowned self] in
                 self.processorDidChange()
             }
         }
     }
-    @IBAction func removeBreakpoint(sender: NSButton) {
-        dispatch_async(queue) { [unowned self] in
-            self.processor.removeBreakpoint(UInt16(self.memoryTableView.selectedRow))
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+    @IBAction func removeBreakpoint(_ sender: NSButton) {
+        queue.async { [unowned self] in
+            self.processor.removeBreakpoint(location: UInt16(self.memoryTableView.selectedRow))
+            DispatchQueue.main.async { [unowned self] in
                 self.processorDidChange()
             }
         }
     }
     
-    private func processorDidChange() {
-        let indexSet = NSIndexSet(index: Int(self.processor.currentAddress))
+    fileprivate func processorDidChange() {
+        let indexSet = IndexSet(integer: Int(self.processor.currentAddress))
         self.memoryTableView.reloadData()
         self.memoryTableView.selectRowIndexes(indexSet, byExtendingSelection: false)
-        self.memoryTableView.scrollRowToVisible(indexSet.firstIndex)
+        self.memoryTableView.scrollRowToVisible(indexSet.first ?? 0)
         self.registerTableView.reloadData()
     }
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
