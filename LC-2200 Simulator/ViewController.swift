@@ -31,8 +31,9 @@ class ViewController: NSViewController {
         registerTableView.doubleAction = #selector(ViewController.goToRegister)
     }
     
+    @objc
     func goToRegister() {
-        let register = RegisterFile.Register(rawValue: UInt8(truncatingBitPattern: registerTableView.selectedRow))!
+        let register = RegisterFile.Register(rawValue: UInt8(truncatingIfNeeded: registerTableView.selectedRow))!
         let index = Int(processor.registers[register])
         self.memoryTableView.scrollRowToVisible(index)
         self.memoryTableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
@@ -47,7 +48,7 @@ class ViewController: NSViewController {
         openPanel.allowsOtherFileTypes = false
         openPanel.canChooseDirectories = false
         openPanel.canChooseFiles = true
-        if result == NSFileHandlingPanelOKButton {
+        if result == NSApplication.ModalResponse.OK {
             let memory: String
             if openPanel.urls.first!.pathExtension == "lc" {
                 do {
@@ -56,7 +57,7 @@ class ViewController: NSViewController {
                     print(error)
                     exit(1)
                 }
-                let vals = memory.characters.split { $0 == " " || $0 == "\n" }.map(String.init)
+                let vals = memory.split { $0 == " " || $0 == "\n" }.map(String.init)
                 let things = vals.map { (s) -> (UInt16) in
                     if let data = UInt16(s, radix: 16) {
                         return data

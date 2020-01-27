@@ -36,7 +36,7 @@ extension ViewController: NSTableViewDelegate {
         }
         return nil
     }
-    
+
     fileprivate func configureMemoryTableCell(column: NSTableColumn?, row: Int) -> NSView? {
         var text = ""
         var identifier = ""
@@ -54,13 +54,14 @@ extension ViewController: NSTableViewDelegate {
             text = Instruction(value: memLoc).debugDescription
             identifier = "instructionCellID"
         }
-        if let cell = self.memoryTableView.make(withIdentifier: identifier, owner: nil) as? NSTableCellView {
+        if let cell = self.memoryTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: identifier), owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = text
             if (processor.hasBreakpointAtAddress(UInt16(row))) {
                 cell.layer?.backgroundColor = NSColor(hue: 0.0, saturation: 0.46, brightness: 0.92, alpha: 1.0).cgColor
             } else {
                 cell.layer?.backgroundColor = NSColor.clear.cgColor
             }
+            cell.textField?.font = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
             return cell
         }
         return nil
@@ -70,7 +71,7 @@ extension ViewController: NSTableViewDelegate {
         var text = ""
         var identifier = ""
         if column == registerTableView.tableColumns[0] {
-            text = RegisterFile.Register(rawValue: UInt8(truncatingBitPattern: row))!.description
+            text = RegisterFile.Register(rawValue: UInt8(truncatingIfNeeded: row))!.description
             identifier = "registerCellID"
         } else if column == registerTableView.tableColumns[1] {
             text = "\(processor.registers[row])"
@@ -79,8 +80,9 @@ extension ViewController: NSTableViewDelegate {
             }
             identifier = "registerValueCellID"
         }
-        if let cell = self.registerTableView.make(withIdentifier: identifier, owner: nil) as? NSTableCellView {
+        if let cell = self.registerTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: identifier), owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = text
+            cell.textField?.font = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
             return cell
         }
         return nil
